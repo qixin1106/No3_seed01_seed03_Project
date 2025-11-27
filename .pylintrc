@@ -1,0 +1,7 @@
+[MASTER]
+
+[MESSAGES CONTROL]
+disable=import-error, no-member
+
+[TYPECHECK]
+ignored-modules=pygame
