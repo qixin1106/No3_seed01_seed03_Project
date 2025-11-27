@@ -1,8 +1,19 @@
 [project]
-name = "no3-seed01-seed03-project"
+name = "lianliankan"
 version = "0.1.0"
-description = "Add your description here"
+description = "A simple pixel-style连连看 game with Pygame"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "pygame>=2.5.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.1",
 ]
