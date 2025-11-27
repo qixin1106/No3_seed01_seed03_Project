@@ -1,0 +1,70 @@
+2025-11-27 13:27:02,870 - main - ERROR - Exception occurred: object NoneType can't be used in 'await' expression
+Traceback (most recent call last):
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/middleware/sessions.py", line 85, in __call__
+    await self.app(scope, receive, send_wrapper)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/fastapi/routing.py", line 125, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/fastapi/routing.py", line 111, in app
+    response = await f(request)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/fastapi/routing.py", line 391, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/fastapi/routing.py", line 290, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/routes/auth.py", line 31, in register_page
+    user = await get_current_user(request)
+TypeError: object NoneType can't be used in 'await' expression
+2025-11-27 13:27:09,838 - main - ERROR - Exception occurred: object NoneType can't be used in 'await' expression
+Traceback (most recent call last):
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/middleware/sessions.py", line 85, in __call__
+    await self.app(scope, receive, send_wrapper)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/fastapi/routing.py", line 125, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/fastapi/routing.py", line 111, in app
+    response = await f(request)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/fastapi/routing.py", line 391, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/.venv/lib/python3.10/site-packages/fastapi/routing.py", line 290, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/qixin/Documents/PersonalWork/TraeCN-Demo/三期/test_11_27/No3_Project_03/routes/auth.py", line 31, in register_page
+    user = await get_current_user(request)
+TypeError: object NoneType can't be used in 'await' expression
