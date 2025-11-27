@@ -5,4 +5,11 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "fastapi>=0.122.0",
+    "jinja2>=3.1.6",
+    "passlib[bcrypt]>=1.7.4",
+    "python-jose[cryptography]>=3.5.0",
+    "python-multipart>=0.0.20",
+    "tortoise-orm>=0.25.1",
+    "uvicorn>=0.38.0",
 ]
