@@ -1,8 +1,16 @@
 [project]
-name = "no3-seed01-seed03-project"
+name = "flappybird"
 version = "0.1.0"
-description = "Add your description here"
-readme = "README.md"
+description = "A simple pixel-style Flappy Bird game using Pygame"
 requires-python = ">=3.10"
 dependencies = [
+    "pygame>=2.5.0",
 ]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+flappybird = "main:main"
+
