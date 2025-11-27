@@ -1,0 +1,46 @@
+# 游戏窗口设置
+WINDOW_WIDTH = 400
+WINDOW_HEIGHT = 800
+
+# 颜色定义
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+RED = (255, 0, 0)
+YELLOW = (255, 255, 0)
+GRAY = (128, 128, 128)
+LIGHT_GRAY = (200, 200, 200)
+BLUE = (0, 0, 255)
+
+# 玩家车辆设置
+PLAYER_WIDTH = 60
+PLAYER_HEIGHT = 100
+PLAYER_X = WINDOW_WIDTH // 2 - PLAYER_WIDTH // 2
+PLAYER_Y = WINDOW_HEIGHT - PLAYER_HEIGHT - 80
+PLAYER_SPEED = 5
+
+# 赛道设置
+MIN_LANES = 3
+MAX_LANES = 5
+LANE_WIDTH = WINDOW_WIDTH // MAX_LANES
+LANE_CHANGE_INTERVAL = 3000  # 3秒
+LANE_CHANGE_SPEED = 2  # 平滑切换速度
+
+# 游戏速度设置
+GAME_SPEED = 8
+
+# 赛道元素设置
+ELEMENT_SPAWN_INTERVAL = 500  # 生成间隔（增加到500ms，减少初始车辆数量）
+ELEMENT_TYPES = ['normal_car', 'red_car', 'blue_car', 'truck', 'rock']
+ELEMENT_WEIGHTS = [40, 15, 15, 10, 20]  # 调整生成概率，减少敌对车辆，增加石块
+
+# 车辆尺寸
+NORMAL_CAR_WIDTH = 50
+NORMAL_CAR_HEIGHT = 80
+TRUCK_WIDTH = int(LANE_WIDTH * 1.5)
+TRUCK_HEIGHT = 120
+
+# 障碍尺寸
+ROCK_RADIUS = 25
+
+# 碰撞检测阈值
+COLLISION_THRESHOLD = 10
