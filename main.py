@@ -1,5 +1,8 @@
+from game import Game
+
 def main():
-    print("Hello from no3-seed01-seed03-project!")
+    game = Game()
+    game.run()
 
 
 if __name__ == "__main__":
