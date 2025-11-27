@@ -5,4 +5,19 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "pygame>=2.5.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0.0",
+]
+
+[tool.pytest.ini_options]
+addopts = "-v"
+python_files = "test_*.py"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.1",
 ]
