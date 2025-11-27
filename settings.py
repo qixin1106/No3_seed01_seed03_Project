@@ -1,0 +1,37 @@
+# 游戏设置
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+FPS = 60
+
+# 颜色定义
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+YELLOW = (255, 255, 0)
+
+# 飞船设置
+SHIP_WIDTH = 50
+SHIP_HEIGHT = 40
+SHIP_SPEED = 5
+
+# 子弹设置
+BULLET_WIDTH = 4
+BULLET_HEIGHT = 15
+BULLET_SPEED = 7
+BULLET_COLOR = YELLOW
+
+# 陨石设置
+METEOR_MIN_SIZE = 20
+METEOR_MAX_SIZE = 60
+METEOR_MIN_SPEED = 1
+METEOR_MAX_SPEED = 5
+METEOR_SPAWN_RATE = 0.02  # 每帧生成陨石的概率
+
+# 游戏状态
+GAME_STATE = {
+    'playing': 0,
+    'paused': 1,
+    'game_over': 2
+}

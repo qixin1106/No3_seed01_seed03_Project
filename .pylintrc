@@ -1,0 +1,9 @@
+[MASTER]
+
+[TYPECHECK]
+# 禁用Pygame相关的no-member错误，因为Pygame使用动态属性
+disable=no-member
+
+[MESSAGES CONTROL]
+# 可以根据需要添加其他要禁用的检查
+# disable=import-error,unused-import,unused-variable

@@ -1,6 +1,5 @@
-def main():
-    print("Hello from no3-seed01-seed03-project!")
-
+from game import SpaceShooterGame
 
 if __name__ == "__main__":
-    main()
+    game = SpaceShooterGame()
+    game.run()
