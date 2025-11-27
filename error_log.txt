@@ -1,0 +1,41 @@
+===== 错误日志 =====
+
+时间: 2024-11-27
+
+错误信息1:
+starlette.routing.NoMatchFound: No route exists for name "auth.register_page" and params ""
+
+错误位置:
+templates/auth/login.html, line 47
+
+错误堆栈:
+File "templates/auth/login.html", line 47, in top-level template code
+    还没有账号？<a href="{{ url_for('auth.register_page') }}">立即注册</a>
+
+问题分析:
+登录页面模板中调用了不存在的路由名称"auth.register_page"。由于路由已经有了prefix="/auth"，所以应该直接使用"register_page"作为路由名称。
+
+解决方案:
+1. 修改templates/auth/login.html文件中的路由名称，将"auth.register_page"改为"register_page"
+2. 修改templates/auth/register.html文件中的路由名称，将"auth.login_page"改为"login_page"
+3. 重启应用以确保修改生效
+
+修复状态:
+已修复。应用已成功重启，现在应该可以正常访问首页、登录页面和注册页面。
+
+---
+
+错误信息2:
+password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+
+错误位置:
+models/user.py, get_password_hash方法
+
+问题分析:
+bcrypt算法最多支持72字节的密码，当用户输入的密码超过72字节时会抛出错误。
+
+解决方案:
+修改models/user.py文件中的get_password_hash方法，添加密码长度截断功能，自动截断超过72字节的密码。
+
+修复状态:
+已修复。现在密码会自动截断为72字节，避免bcrypt算法抛出错误。

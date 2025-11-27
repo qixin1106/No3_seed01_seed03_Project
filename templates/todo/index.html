@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>待办系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- 页面头部 -->
+        <header class="header">
+            <div class="header-content">
+                <h1>我的待办</h1>
+                <div class="user-info">
+                    <span>欢迎，{{ user.username }}</span>
+                    <form method="post" action="{{ url_for('auth.logout') }}" style="display: inline;">
+                        <button type="submit" class="btn btn-secondary">退出登录</button>
+                    </form>
+                </div>
+            </div>
+        </header>
+        
+        <!-- 消息提示 -->
+        {% if message %}
+        <div class="alert alert-success">
+            <p>{{ message }}</p>
+        </div>
+        {% endif %}
+        
+        {% if error %}
+        <div class="alert alert-error">
+            <p>{{ error }}</p>
+        </div>
+        {% endif %}
+        
+        <!-- 添加待办表单 -->
+        <div class="add-todo">
+            <h2>添加新待办</h2>
+            <form method="post" action="{{ url_for('todo.add_todo') }}" onsubmit="disableSubmitButton()">
+                <div class="form-group">
+                    <label for="title">标题</label>
+                    <input type="text" id="title" name="title" placeholder="输入待办标题" 
+                           required minlength="1" maxlength="100">
+                </div>
+                <div class="form-group">
+                    <label for="content">内容（可选）</label>
+                    <textarea id="content" name="content" rows="3" placeholder="输入待办内容"></textarea>
+                </div>
+                <button type="submit" id="submit-btn" class="btn btn-primary">添加待办</button>
+            </form>
+        </div>
+        
+        <!-- 待办列表 -->
+        <div class="todo-lists">
+            <!-- 未完成待办 -->
+            {% if incomplete_todos %}
+            <div class="todo-section">
+                <h2>未完成 ({{ incomplete_todos|length }})</h2>
+                <ul class="todo-list">
+                    {% for todo in incomplete_todos %}
+                    <li class="todo-item">
+                        <div class="todo-content">
+                            <h3>{{ todo.title }}</h3>
+                            {% if todo.content %}
+                            <p class="todo-description">{{ todo.content }}</p>
+                            {% endif %}
+                            <small class="todo-time">创建于：{{ todo.create_time.strftime('%Y-%m-%d %H:%M') }}</small>
+                        </div>
+                        <div class="todo-actions">
+                            <!-- 标记完成 -->
+                            <form method="post" action="{{ url_for('todo.toggle_todo', todo_id=todo.id) }}" style="display: inline;">
+                                <button type="submit" class="btn btn-success">完成</button>
+                            </form>
+                            
+                            <!-- 编辑 -->
+                            <button class="btn btn-secondary" onclick="editTodo({{ todo.id }}, '{{ todo.title|escape }}', '{{ todo.content|escape if todo.content else '' }}')">
+                                编辑
+                            </button>
+                            
+                            <!-- 删除 -->
+                            <form method="post" action="{{ url_for('todo.delete_todo', todo_id=todo.id) }}" 
+                                  style="display: inline;" onsubmit="return confirm('确定要删除这个待办吗？')">
+                                <button type="submit" class="btn btn-danger">删除</button>
+                            </form>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            
+            <!-- 已完成待办 -->
+            {% if completed_todos %}
+            <div class="todo-section">
+                <h2>已完成 ({{ completed_todos|length }})</h2>
+                <ul class="todo-list">
+                    {% for todo in completed_todos %}
+                    <li class="todo-item completed">
+                        <div class="todo-content">
+                            <h3>{{ todo.title }}</h3>
+                            {% if todo.content %}
+                            <p class="todo-description">{{ todo.content }}</p>
+                            {% endif %}
+                            <small class="todo-time">创建于：{{ todo.create_time.strftime('%Y-%m-%d %H:%M') }}</small>
+                        </div>
+                        <div class="todo-actions">
+                            <!-- 标记未完成 -->
+                            <form method="post" action="{{ url_for('todo.toggle_todo', todo_id=todo.id) }}" style="display: inline;">
+                                <button type="submit" class="btn btn-secondary">撤销</button>
+                            </form>
+                            
+                            <!-- 删除 -->
+                            <form method="post" action="{{ url_for('todo.delete_todo', todo_id=todo.id) }}" 
+                                  style="display: inline;" onsubmit="return confirm('确定要删除这个待办吗？')">
+                                <button type="submit" class="btn btn-danger">删除</button>
+                            </form>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            
+            <!-- 空状态 -->
+            {% if not incomplete_todos and not completed_todos %}
+            <div class="empty-state">
+                <h2>还没有待办事项</h2>
+                <p>添加你的第一个待办开始吧！</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- 编辑模态框 -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>编辑待办</h2>
+            <form method="post" id="editForm" onsubmit="disableEditButton()">
+                <div class="form-group">
+                    <label for="editTitle">标题</label>
+                    <input type="text" id="editTitle" name="title" required minlength="1" maxlength="100">
+                </div>
+                <div class="form-group">
+                    <label for="editContent">内容（可选）</label>
+                    <textarea id="editContent" name="content" rows="3"></textarea>
+                </div>
+                <button type="submit" id="editSubmitBtn" class="btn btn-primary">保存修改</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // 编辑待办
+        function editTodo(id, title, content) {
+            const modal = document.getElementById('editModal');
+            const form = document.getElementById('editForm');
+            const titleInput = document.getElementById('editTitle');
+            const contentInput = document.getElementById('editContent');
+            
+            // 设置表单action和数据
+            form.action = `/edit/${id}`;
+            titleInput.value = title;
+            contentInput.value = content;
+            
+            // 显示模态框
+            modal.style.display = "block";
+        }
+        
+        // 关闭模态框
+        function closeModal() {
+            document.getElementById('editModal').style.display = "none";
+        }
+        
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('editModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        
+        // 禁用提交按钮
+        function disableSubmitButton() {
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.textContent = '添加中...';
+        }
+        
+        function disableEditButton() {
+            const btn = document.getElementById('editSubmitBtn');
+            btn.disabled = true;
+            btn.textContent = '保存中...';
+        }
+    </script>
+</body>
+</html>
