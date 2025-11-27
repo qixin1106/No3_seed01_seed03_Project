@@ -1,0 +1,9 @@
+[project]
+name = "no3-seed01-seed03-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pygame>=2.6.1",
+]
